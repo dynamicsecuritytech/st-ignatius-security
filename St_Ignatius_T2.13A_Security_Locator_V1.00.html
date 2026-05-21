@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>St. Ignatius — T2.13A Security Locator</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial,sans-serif;background:#0f1923;color:#fff;height:100vh;display:flex;flex-direction:column;overflow:hidden;}
+.header{background:#1A2A4A;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:3px solid #2C3E6E;}
+.header h1{font-size:14px;font-weight:bold;}
+.header p{font-size:11px;color:#aac;}
+.badge{background:#2C3E6E;color:#fff;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:bold;}
+.main{display:flex;flex:1;overflow:hidden;}
+.sidebar{width:230px;flex-shrink:0;background:#1a2535;border-right:1px solid #2C3E6E;overflow-y:auto;display:flex;flex-direction:column;}
+.sidebar-title{background:#2C3E6E;padding:8px 12px;font-size:11px;font-weight:bold;color:#aac;text-transform:uppercase;letter-spacing:1px;flex-shrink:0;}
+.legend{padding:8px;border-bottom:1px solid #2C3E6E;flex-shrink:0;}
+.leg-item{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:4px;cursor:pointer;transition:background 0.15s;margin-bottom:2px;}
+.leg-item:hover{background:#243a55;}
+.leg-item.active{background:#1A2A4A;outline:1px solid #aac;}
+.leg-item.dimmed{opacity:0.35;}
+.leg-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.leg-label{font-size:11px;font-weight:bold;flex:1;}
+.leg-count{font-size:10px;background:#2C3E6E;color:#aac;padding:1px 5px;border-radius:8px;}
+.dev-list{flex:1;overflow-y:auto;}
+.dev-item{padding:7px 12px;border-bottom:1px solid #243040;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background 0.15s;}
+.dev-item:hover{background:#243a55;}
+.dev-item.active{background:#1A2A4A;border-left:3px solid #fff;}
+.dev-sym{font-size:11px;font-weight:bold;color:#fff;min-width:50px;padding:2px 5px;border-radius:3px;text-align:center;}
+.dev-door{font-size:10px;color:#aac;}
+.viewer{flex:1;position:relative;overflow:hidden;background:#111;}
+#fp-container{position:absolute;top:0;left:0;transform-origin:0 0;transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);}
+#fp-img{display:block;max-width:none;}
+.pin{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:10;}
+.pin-circle{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;font-size:5px;font-weight:bold;color:#fff;transition:all 0.2s;box-shadow:0 2px 6px rgba(0,0,0,0.5);}
+.pin.active .pin-circle{width:28px;height:28px;font-size:8px;border:2.5px solid #fff;box-shadow:0 0 0 3px rgba(255,255,255,0.3),0 4px 12px rgba(0,0,0,0.7);}
+.pin.dimmed{opacity:0.2;pointer-events:none;}
+.pin-label{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);background:#1A2A4A;color:#fff;font-size:9px;font-weight:bold;padding:2px 6px;border-radius:4px;white-space:nowrap;opacity:0;transition:opacity 0.15s;pointer-events:none;border:1px solid rgba(255,255,255,0.3);}
+.pin:hover .pin-label,.pin.active .pin-label{opacity:1;}
+.tooltip{position:fixed;background:#1A2A4A;border:1px solid #2C3E6E;color:#fff;padding:10px 14px;border-radius:8px;font-size:12px;pointer-events:none;z-index:1000;display:none;box-shadow:0 4px 20px rgba(0,0,0,0.6);min-width:180px;}
+.tooltip strong{font-size:13px;display:block;margin-bottom:4px;}
+.tooltip span{color:#aac;font-size:11px;display:block;line-height:1.6;}
+.controls{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:6px;z-index:20;}
+.ctrl-btn{width:34px;height:34px;background:#1A2A4A;border:1px solid #2C3E6E;border-radius:6px;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.ctrl-btn:hover{background:#2C3E6E;}
+.statusbar{background:#1A2A4A;padding:5px 16px;font-size:10px;color:#aac;display:flex;justify-content:space-between;flex-shrink:0;border-top:1px solid #2C3E6E;}
+#loading{position:absolute;inset:0;background:#111;display:flex;align-items:center;justify-content:center;z-index:100;font-size:14px;color:#aac;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <h1>ST. IGNATIUS COLLEGE PREPARATORY — Security Device Locator</h1>
+    <p>Sheet T2.13A — Level 3 (South) &nbsp;|&nbsp; Dynamic Field Takeoff V.012 &nbsp;|&nbsp; May 2026</p>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <span class="badge" id="total-badge">6 DEVICES</span>
+  </div>
+</div>
+<div class="main">
+  <div class="sidebar">
+    <div class="sidebar-title">Device Types — T2.13A</div>
+    <div class="legend" id="legend"><div class="leg-item" onclick="filterDev('IL')" id="leg-IL"><span class="leg-dot" style="background:#8E24AA"></span><span class="leg-label">IL</span><span class="leg-count" id="lc-IL">0</span></div><div class="leg-item" onclick="filterDev('LA')" id="leg-LA"><span class="leg-dot" style="background:#F57C00"></span><span class="leg-label">LA</span><span class="leg-count" id="lc-LA">0</span></div></div>
+    <div class="sidebar-title" style="margin-top:0;">Device List</div>
+    <div class="dev-list" id="dev-list"></div>
+  </div>
+  <div class="viewer" id="viewer">
+    <div id="loading">Loading floor plan…</div>
+    <div id="fp-container">
+      <img id="fp-img" src="img_T2.13A.png" alt="T2.13A">
+      <div id="pins" style="position:absolute;top:0;left:0;pointer-events:none;"></div>
+    </div>
+    <div class="controls">
+      <button class="ctrl-btn" onclick="zoom(1.25)">+</button>
+      <button class="ctrl-btn" onclick="zoom(0.8)">−</button>
+      <button class="ctrl-btn" onclick="resetView()" style="font-size:13px;">⌂</button>
+    </div>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+</div>
+<div class="statusbar">
+  <span id="status">Loading…</span>
+  <span>St. Ignatius College Preparatory &nbsp;|&nbsp; Dynamic &nbsp;|&nbsp; www.dystinc.com</span>
+</div>
+<script>
+const DEVICES = [{"sym": "IL", "desc": "Integrated Lock", "color": "#8E24AA", "door": "377", "x": 57.09, "y": 38.69}, {"sym": "IL", "desc": "Integrated Lock", "color": "#8E24AA", "door": "376", "x": 54.45, "y": 50.41}, {"sym": "IL", "desc": "Integrated Lock", "color": "#8E24AA", "door": "375", "x": 54.43, "y": 67.89}, {"sym": "LA", "desc": "Local Alarm", "color": "#F57C00", "door": "377", "x": 60.24, "y": 38.26}, {"sym": "LA", "desc": "Local Alarm", "color": "#F57C00", "door": "379B", "x": 56.48, "y": 40.64}, {"sym": "LA", "desc": "Local Alarm", "color": "#F57C00", "door": "378B", "x": 56.61, "y": 62.48}];
+const params = new URLSearchParams(window.location.search);
+const TARGET_SYM = params.get('dev') || '';
+const TARGET_X = parseFloat(params.get('x') || '0');
+const TARGET_Y = parseFloat(params.get('y') || '0');
+
+let scale=1,tx=0,ty=0,imgW=0,imgH=0,activeFilter=null;
+const container=document.getElementById('fp-container');
+const img=document.getElementById('fp-img');
+const viewer=document.getElementById('viewer');
+const pins=document.getElementById('pins');
+const tooltip=document.getElementById('tooltip');
+
+function applyT(x,y){tx=x;ty=y;container.style.transform=`translate(${x}px,${y}px) scale(${scale})`;}
+function zoom(f){scale=Math.max(0.15,Math.min(10,scale*f));applyT(tx,ty);}
+function resetView(){const vw=viewer.clientWidth,vh=viewer.clientHeight;scale=Math.min(vw/imgW,vh/imgH)*0.95;applyT((vw-imgW*scale)/2,(vh-imgH*scale)/2);setActive(null);clearFilter();document.getElementById('status').textContent='Click a device or filter by type';}
+
+function navigateTo(dev,idx){
+  const vw=viewer.clientWidth,vh=viewer.clientHeight;
+  scale=Math.min(vw/imgW,vh/imgH)*4.5;
+  applyT(vw/2-(dev.x/100)*imgW*scale,vh/2-(dev.y/100)*imgH*scale);
+  setActive(idx);
+  document.getElementById('status').textContent=`${dev.sym} — ${dev.desc} — Door/Ref: ${dev.door}`;
+}
+
+function setActive(idx){
+  document.querySelectorAll('.pin').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.dev-item').forEach(i=>i.classList.remove('active'));
+  if(idx!==null){
+    const pin=document.getElementById('pin-'+idx);
+    const item=document.getElementById('item-'+idx);
+    if(pin)pin.classList.add('active');
+    if(item){item.classList.add('active');item.scrollIntoView({block:'nearest'});}
+  }
+}
+
+function filterDev(sym){
+  if(activeFilter===sym){clearFilter();return;}
+  activeFilter=sym;
+  document.querySelectorAll('.leg-item').forEach(l=>{l.classList.remove('active');l.classList.add('dimmed');});
+  const legEl=document.getElementById('leg-'+sym);
+  if(legEl){legEl.classList.remove('dimmed');legEl.classList.add('active');}
+  document.querySelectorAll('.pin').forEach(p=>{
+    p.classList.toggle('dimmed',p.dataset.sym!==sym);
+  });
+  document.querySelectorAll('.dev-item').forEach(i=>{
+    i.style.display=i.dataset.sym===sym?'flex':'none';
+  });
+}
+
+function clearFilter(){
+  activeFilter=null;
+  document.querySelectorAll('.leg-item').forEach(l=>{l.classList.remove('active','dimmed');});
+  document.querySelectorAll('.pin').forEach(p=>p.classList.remove('dimmed'));
+  document.querySelectorAll('.dev-item').forEach(i=>i.style.display='flex');
+}
+
+img.onload=function(){
+  imgW=img.naturalWidth;imgH=img.naturalHeight;
+  pins.style.width=imgW+'px';pins.style.height=imgH+'px';
+
+  // Count per sym for legend
+  const symCounts={};
+  DEVICES.forEach(d=>{symCounts[d.sym]=(symCounts[d.sym]||0)+1;});
+  Object.entries(symCounts).forEach(([sym,cnt])=>{
+    const el=document.getElementById('lc-'+sym);
+    if(el)el.textContent=cnt;
+  });
+
+  // Build pins and list
+  const list=document.getElementById('dev-list');
+  DEVICES.forEach((dev,idx)=>{
+    // Pin
+    const pin=document.createElement('div');
+    pin.className='pin'; pin.id='pin-'+idx; pin.dataset.sym=dev.sym;
+    pin.style.left=dev.x+'%'; pin.style.top=dev.y+'%'; pin.style.pointerEvents='all';
+    pin.innerHTML=`<div class="pin-circle" style="background:${dev.color}">${dev.sym.replace('CR-','').replace('C-','')}</div><div class="pin-label">${dev.sym} ${dev.door!='?'?'— '+dev.door:''}</div>`;
+    pin.addEventListener('click',()=>navigateTo(dev,idx));
+    pin.addEventListener('mouseenter',e=>{
+      tooltip.innerHTML=`<strong style="color:${dev.color}">${dev.sym}</strong><span>${dev.desc}</span><span>Door/Ref: ${dev.door}</span>`;
+      tooltip.style.display='block'; tooltip.style.left=(e.clientX+14)+'px'; tooltip.style.top=(e.clientY-10)+'px';
+    });
+    pin.addEventListener('mouseleave',()=>tooltip.style.display='none');
+    pins.appendChild(pin);
+
+    // List item
+    const item=document.createElement('div');
+    item.className='dev-item'; item.id='item-'+idx; item.dataset.sym=dev.sym;
+    item.innerHTML=`<span class="dev-sym" style="background:${dev.color}">${dev.sym}</span><span class="dev-door">${dev.door!='?'?dev.door:'—'}</span>`;
+    item.addEventListener('click',()=>navigateTo(dev,idx));
+    list.appendChild(item);
+  });
+
+  const vw=viewer.clientWidth,vh=viewer.clientHeight;
+  scale=Math.min(vw/imgW,vh/imgH)*0.95;
+  applyT((vw-imgW*scale)/2,(vh-imgH*scale)/2);
+  document.getElementById('loading').style.display='none';
+
+  // Auto-navigate if target params provided
+  if(TARGET_SYM&&TARGET_X>0&&TARGET_Y>0){
+    const match=DEVICES.findIndex(d=>d.sym===TARGET_SYM&&Math.abs(d.x-TARGET_X)<1&&Math.abs(d.y-TARGET_Y)<1);
+    if(match>=0){navigateTo(DEVICES[match],match);filterDev(TARGET_SYM);}
+    else{
+      // Navigate to closest matching sym
+      const closest=DEVICES.reduce((best,d,i)=>{
+        if(d.sym!==TARGET_SYM)return best;
+        const dist=Math.hypot(d.x-TARGET_X,d.y-TARGET_Y);
+        return dist<best.dist?{idx:i,dist}:best;
+      },{idx:-1,dist:999});
+      if(closest.idx>=0){navigateTo(DEVICES[closest.idx],closest.idx);filterDev(TARGET_SYM);}
+    }
+  } else {
+    document.getElementById('status').textContent='Click a device or filter by type using the legend';
+  }
+};
+
+let dragging=false,dsx,dsy,dtx,dty;
+viewer.addEventListener('mousedown',e=>{dragging=true;dsx=e.clientX;dsy=e.clientY;dtx=tx;dty=ty;});
+window.addEventListener('mousemove',e=>{if(!dragging)return;applyT(dtx+e.clientX-dsx,dty+e.clientY-dsy);});
+window.addEventListener('mouseup',()=>dragging=false);
+viewer.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.1:0.9);},{passive:false});
+</script>
+</body>
+</html>
