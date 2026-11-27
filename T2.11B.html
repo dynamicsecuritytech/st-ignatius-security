@@ -44,7 +44,7 @@
 const SHEET = "T2.11B";
 const IMG_W = 7152;
 const IMG_H = 5052;
-const BASE_URL = "https://dynamicsecuritytech.github.io/st-ignatius-cameras";
+const BASE_URL = "https://dynamicsecuritytech.github.io/st-ignatius-security";
 
 // Camera coordinates on the image (pixels at 3.0x scale)
 const CAM_COORDS = {
@@ -259,7 +259,7 @@ img.onload = function() {
   canvas.height = IMG_H;
   ctx.drawImage(img, 0, 0);
   fitView();
-  status.textContent = `${Object.keys(CAM_COORDS).length} cameras on this sheet`;
+  status.textContent = `${Object.keys(CAM_COORDS).length} devices on this sheet`;
   setTimeout(() => status.style.display = "none", 3000);
   checkDeepLink();
 };
@@ -368,10 +368,11 @@ function showRect(bx0, by0, bx1, by1) {
     const sy0 = by0 * scale + offY;
     const sx1 = bx1 * scale + offX;
     const sy1 = by1 * scale + offY;
-    hlRect.style.left   = sx0 + "px";
-    hlRect.style.top    = sy0 + "px";
-    hlRect.style.width  = (sx1 - sx0) + "px";
-    hlRect.style.height = (sy1 - sy0) + "px";
+    const PAD = 10, BW = 4;  // clear gap so the outline never covers the tag text
+    hlRect.style.left   = (sx0 - PAD - BW) + "px";
+    hlRect.style.top    = (sy0 - PAD - BW) + "px";
+    hlRect.style.width  = (sx1 - sx0 + 2*PAD) + "px";
+    hlRect.style.height = (sy1 - sy0 + 2*PAD) + "px";
   }
   posRect();
   hlRect._posRect = posRect;
