@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T2.10B — St. Ignatius Camera Plan (November 2026)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #1a1a2e; color: #eee; font-family: Arial, sans-serif; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+  #toolbar { background: #16213e; padding: 8px 12px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #0f3460; flex-shrink: 0; }
+  #toolbar h1 { font-size: 14px; color: #e94560; letter-spacing: 1px; margin-right: 10px; }
+  #toolbar span { font-size: 12px; color: #aaa; }
+  #cam-info { background: #0f3460; padding: 4px 10px; border-radius: 4px; font-size: 13px; color: #4fc3f7; min-width: 120px; }
+  #zoom-controls { display: flex; gap: 6px; margin-left: auto; }
+  #zoom-controls button { background: #0f3460; border: 1px solid #e94560; color: #eee; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  #zoom-controls button:hover { background: #e94560; }
+  #canvas-wrap { flex: 1; overflow: hidden; position: relative; cursor: grab; }
+  #canvas-wrap.grabbing { cursor: grabbing; }
+  canvas { position: absolute; top: 0; left: 0; image-rendering: auto; }
+  #highlight-rect { position: absolute; border: 4px solid #e94560; border-radius: 0; pointer-events: none; display: none; box-shadow: 0 0 16px #e94560, 0 0 32px rgba(233,69,96,0.6); animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 12px #e94560, 0 0 24px rgba(233,69,96,.5); } 50% { box-shadow: 0 0 20px #e94560, 0 0 40px rgba(233,69,96,.8); } }
+  #status { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.7); padding: 5px 14px; border-radius: 20px; font-size: 12px; color: #aaa; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <h1>ST. IGNATIUS — T2.10B</h1>
+  <div id="cam-info">No camera selected</div>
+  <span>Scroll/pinch to zoom · Drag to pan</span>
+  <div id="zoom-controls">
+    <button onclick="zoomBy(1.5)">＋</button>
+    <button onclick="zoomBy(0.67)">－</button>
+    <button onclick="resetView()">Reset</button>
+    <button onclick="fitView()">Fit</button>
+  </div>
+</div>
+<div id="canvas-wrap">
+  <canvas id="plan"></canvas>
+  <div id="highlight-rect"></div>
+  <div id="status">Loading plan...</div>
+</div>
+
+<script>
+const SHEET = "T2.10B";
+const IMG_W = 7152;
+const IMG_H = 5052;
+const BASE_URL = "https://dynamicsecuritytech.github.io/st-ignatius-cameras";
+
+// Camera coordinates on the image (pixels at 3.0x scale)
+const CAM_COORDS = {
+  "K00-04": {
+    "x": 1139,
+    "y": 2926,
+    "bx0": 1091,
+    "by0": 2901,
+    "bx1": 1187,
+    "by1": 2951
+  },
+  "K00-01": {
+    "x": 1138,
+    "y": 3247,
+    "bx0": 1090,
+    "by0": 3222,
+    "bx1": 1186,
+    "by1": 3271
+  },
+  "K00-10": {
+    "x": 4769,
+    "y": 1886,
+    "bx0": 4721,
+    "by0": 1861,
+    "bx1": 4817,
+    "by1": 1911
+  },
+  "K00-14": {
+    "x": 6010,
+    "y": 2865,
+    "bx0": 5962,
+    "by0": 2841,
+    "bx1": 6058,
+    "by1": 2890
+  },
+  "K00-16": {
+    "x": 6010,
+    "y": 3683,
+    "bx0": 5962,
+    "by0": 3658,
+    "bx1": 6058,
+    "by1": 3708
+  },
+  "K00-13": {
+    "x": 4532,
+    "y": 4271,
+    "bx0": 4484,
+    "by0": 4246,
+    "bx1": 4581,
+    "by1": 4296
+  },
+  "WR-00-03": {
+    "x": 1139,
+    "y": 2485,
+    "bx0": 1091,
+    "by0": 2460,
+    "bx1": 1187,
+    "by1": 2510
+  },
+  "WR-00-02": {
+    "x": 1139,
+    "y": 2686,
+    "bx0": 1091,
+    "by0": 2662,
+    "bx1": 1187,
+    "by1": 2711
+  },
+  "WR-00-04": {
+    "x": 1139,
+    "y": 2812,
+    "bx0": 1091,
+    "by0": 2788,
+    "bx1": 1187,
+    "by1": 2837
+  },
+  "WR-00-06": {
+    "x": 1139,
+    "y": 3929,
+    "bx0": 1091,
+    "by0": 3905,
+    "bx1": 1187,
+    "by1": 3954
+  },
+  "WR-00-07": {
+    "x": 1916,
+    "y": 4207,
+    "bx0": 1868,
+    "by0": 4182,
+    "bx1": 1964,
+    "by1": 4232
+  },
+  "WR-00-08": {
+    "x": 1993,
+    "y": 4271,
+    "bx0": 1945,
+    "by0": 4246,
+    "bx1": 2041,
+    "by1": 4296
+  },
+  "WR-00-09": {
+    "x": 2757,
+    "y": 4207,
+    "bx0": 2709,
+    "by0": 4182,
+    "bx1": 2805,
+    "by1": 4232
+  },
+  "WR-00-10": {
+    "x": 2881,
+    "y": 4207,
+    "bx0": 2833,
+    "by0": 4182,
+    "bx1": 2930,
+    "by1": 4232
+  },
+  "WR-00-11": {
+    "x": 2998,
+    "y": 4207,
+    "bx0": 2950,
+    "by0": 4182,
+    "bx1": 3047,
+    "by1": 4232
+  },
+  "WR-00-12": {
+    "x": 3115,
+    "y": 4271,
+    "bx0": 3067,
+    "by0": 4246,
+    "bx1": 3163,
+    "by1": 4296
+  },
+  "WR-00-13": {
+    "x": 3194,
+    "y": 4335,
+    "bx0": 3146,
+    "by0": 4310,
+    "bx1": 3242,
+    "by1": 4360
+  },
+  "WR-00-18": {
+    "x": 4464,
+    "y": 4335,
+    "bx0": 4416,
+    "by0": 4310,
+    "bx1": 4512,
+    "by1": 4360
+  },
+  "WR-00-19": {
+    "x": 6010,
+    "y": 2493,
+    "bx0": 5962,
+    "by0": 2468,
+    "bx1": 6058,
+    "by1": 2518
+  },
+  "WR-00-17": {
+    "x": 3910,
+    "y": 1886,
+    "bx0": 3862,
+    "by0": 1861,
+    "bx1": 3958,
+    "by1": 1911
+  },
+  "WR-00-21": {
+    "x": 3072,
+    "y": 1886,
+    "bx0": 3024,
+    "by0": 1861,
+    "bx1": 3120,
+    "by1": 1911
+  },
+  "WR-00-15": {
+    "x": 3072,
+    "y": 1813,
+    "bx0": 3024,
+    "by0": 1788,
+    "bx1": 3120,
+    "by1": 1838
+  },
+  "WR-00-14": {
+    "x": 3252,
+    "y": 1886,
+    "bx0": 3204,
+    "by0": 1861,
+    "bx1": 3300,
+    "by1": 1911
+  },
+  "WR-00-16": {
+    "x": 2909,
+    "y": 1886,
+    "bx0": 2861,
+    "by0": 1861,
+    "bx1": 2957,
+    "by1": 1911
+  },
+  "WR-00-01": {
+    "x": 1139,
+    "y": 2085,
+    "bx0": 1091,
+    "by0": 2060,
+    "bx1": 1187,
+    "by1": 2110
+  },
+  "WR-00-05": {
+    "x": 1139,
+    "y": 3584,
+    "bx0": 1091,
+    "by0": 3559,
+    "bx1": 1187,
+    "by1": 3609
+  },
+  "WR-00-20": {
+    "x": 6010,
+    "y": 3349,
+    "bx0": 5962,
+    "by0": 3324,
+    "bx1": 6058,
+    "by1": 3374
+  }
+};
+
+// ── Canvas + pan/zoom state ───────────────────────────────────────────────────
+const canvas = document.getElementById("plan");
+const ctx    = canvas.getContext("2d");
+const wrap   = document.getElementById("canvas-wrap");
+const hlRect = document.getElementById("highlight-rect");
+const status = document.getElementById("status");
+const camInfo = document.getElementById("cam-info");
+
+let scale = 1, offX = 0, offY = 0;
+let dragging = false, lastX = 0, lastY = 0;
+let img = new Image();
+
+img.onload = function() {
+  canvas.width  = IMG_W;
+  canvas.height = IMG_H;
+  ctx.drawImage(img, 0, 0);
+  fitView();
+  status.textContent = `${Object.keys(CAM_COORDS).length} cameras on this sheet`;
+  setTimeout(() => status.style.display = "none", 3000);
+  checkDeepLink();
+};
+img.src = "T2.10B.png?v=nov2026";
+
+function applyTransform() {
+  canvas.style.transform = `translate(${offX}px, ${offY}px) scale(${scale})`;
+  canvas.style.transformOrigin = "0 0";
+}
+
+function fitView() {
+  const ww = wrap.clientWidth, wh = wrap.clientHeight;
+  scale = Math.min(ww / IMG_W, wh / IMG_H) * 0.95;
+  offX = (ww - IMG_W * scale) / 2;
+  offY = (wh - IMG_H * scale) / 2;
+  applyTransform();
+  hideRect();
+}
+
+function resetView() { fitView(); }
+
+function zoomBy(factor, cx, cy) {
+  if (cx === undefined) { cx = wrap.clientWidth / 2; cy = wrap.clientHeight / 2; }
+  const newScale = Math.min(Math.max(scale * factor, 0.1), 20);
+  offX = cx - (cx - offX) * (newScale / scale);
+  offY = cy - (cy - offY) * (newScale / scale);
+  scale = newScale;
+  applyTransform();
+}
+
+// ── Pan ───────────────────────────────────────────────────────────────────────
+wrap.addEventListener("mousedown", e => {
+  dragging = true; lastX = e.clientX; lastY = e.clientY;
+  wrap.classList.add("grabbing");
+});
+window.addEventListener("mousemove", e => {
+  if (!dragging) return;
+  offX += e.clientX - lastX; offY += e.clientY - lastY;
+  lastX = e.clientX; lastY = e.clientY;
+  applyTransform();
+});
+window.addEventListener("mouseup", () => { dragging = false; wrap.classList.remove("grabbing"); });
+
+// ── Zoom (wheel + pinch) ──────────────────────────────────────────────────────
+wrap.addEventListener("wheel", e => {
+  e.preventDefault();
+  const rect = wrap.getBoundingClientRect();
+  zoomBy(e.deltaY < 0 ? 1.15 : 0.87, e.clientX - rect.left, e.clientY - rect.top);
+}, { passive: false });
+
+let lastPinchDist = null;
+wrap.addEventListener("touchstart", e => {
+  if (e.touches.length === 2) lastPinchDist = Math.hypot(
+    e.touches[0].clientX - e.touches[1].clientX,
+    e.touches[0].clientY - e.touches[1].clientY);
+  else { dragging = true; lastX = e.touches[0].clientX; lastY = e.touches[0].clientY; }
+});
+wrap.addEventListener("touchmove", e => {
+  e.preventDefault();
+  if (e.touches.length === 2) {
+    const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX,
+                         e.touches[0].clientY - e.touches[1].clientY);
+    if (lastPinchDist) zoomBy(d / lastPinchDist);
+    lastPinchDist = d;
+  } else if (dragging) {
+    offX += e.touches[0].clientX - lastX; offY += e.touches[0].clientY - lastY;
+    lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
+    applyTransform();
+  }
+}, { passive: false });
+wrap.addEventListener("touchend", () => { dragging = false; lastPinchDist = null; });
+
+// ── Deep link: ?cam=K00-01 ────────────────────────────────────────────────────
+function checkDeepLink() {
+  const params = new URLSearchParams(window.location.search);
+  const camId  = params.get("cam");
+  if (camId && CAM_COORDS[camId]) {
+    zoomToCamera(camId);
+  } else if (camId) {
+    camInfo.textContent = `${camId} not on this sheet`;
+    camInfo.style.color = "#ff6b6b";
+    status.textContent  = `${camId} not found on ${SHEET}`;
+    status.style.display = "block";
+  }
+}
+
+function zoomToCamera(camId) {
+  const coord = CAM_COORDS[camId];
+  if (!coord) return;
+  const ww = wrap.clientWidth, wh = wrap.clientHeight;
+  // Zoom to show camera with context — show ~1200px of image width around the camera
+  const targetScale = Math.min(ww / 1600, wh / 1600, 2.5);  // show ~1600px of image (camera + room context)
+  scale = targetScale;
+  offX = ww / 2 - coord.x * scale;
+  offY = wh / 2 - coord.y * scale;
+  applyTransform();
+  showRect(coord.bx0, coord.by0, coord.bx1, coord.by1);
+  camInfo.textContent = camId;
+  camInfo.style.color = "#4fc3f7";
+}
+
+function showRect(bx0, by0, bx1, by1) {
+  hlRect.style.display = "block";
+  function posRect() {
+    const sx0 = bx0 * scale + offX;
+    const sy0 = by0 * scale + offY;
+    const sx1 = bx1 * scale + offX;
+    const sy1 = by1 * scale + offY;
+    hlRect.style.left   = sx0 + "px";
+    hlRect.style.top    = sy0 + "px";
+    hlRect.style.width  = (sx1 - sx0) + "px";
+    hlRect.style.height = (sy1 - sy0) + "px";
+  }
+  posRect();
+  hlRect._posRect = posRect;
+}
+
+function hideRect() {
+  hlRect.style.display = "none";
+  hlRect._posRect = null;
+}
+
+// Keep rect in sync with pan/zoom
+const origApply = applyTransform;
+applyTransform = function() { origApply(); if (hlRect._posRect) hlRect._posRect(); };
+</script>
+</body>
+</html>

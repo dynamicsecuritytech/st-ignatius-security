@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St. Ignatius Camera Index — Job #21148 — DST</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #1a1a2e; color: #eee; margin: 0; padding: 20px; }
+  h1 { color: #e94560; font-size: 20px; margin-bottom: 4px; }
+  .sub { color: #aaa; font-size: 13px; margin-bottom: 20px; }
+  input#search { background: #0f3460; border: 1px solid #e94560; color: #eee; padding: 8px 12px; border-radius: 6px; font-size: 14px; width: 260px; margin-bottom: 16px; }
+  input#search::placeholder { color: #666; }
+  table { border-collapse: collapse; width: 100%; max-width: 800px; }
+  th { background: #0f3460; color: #4fc3f7; padding: 8px 12px; text-align: left; font-size: 13px; border-bottom: 2px solid #e94560; }
+  td { padding: 6px 12px; font-size: 13px; border-bottom: 1px solid #222; }
+  tr:hover td { background: #0f3460; }
+  .cam-link { color: #4fc3f7; font-weight: bold; text-decoration: none; }
+  .cam-link:hover { color: #e94560; }
+  .sheet-link { color: #aaa; text-decoration: none; font-size: 12px; }
+  .sheet-link:hover { color: #eee; }
+  .precise { color: #4caf50; font-size: 12px; }
+  .fallback { color: #ff9800; font-size: 12px; }
+  .count { color: #aaa; font-size: 12px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<h1>📷 St. Ignatius College Preparatory — Camera Index</h1>
+<div class="sub">Job #21148 · Dynamic Security Technologies · 111 camera labels · November 2026 Corrections plans</div>
+<input type="text" id="search" placeholder="Search camera ID or floor..." oninput="filterTable()">
+<table id="tbl">
+  <thead>
+    <tr><th>Camera ID</th><th>Plan Sheet</th><th>Location</th><th>Coord</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="T2.10B.html?cam=K00-01" class="cam-link">K00-01</a></td>
+      <td><a href="T2.10B.html" class="sheet-link">T2.10B</a></td>
+      <td>Lower Level — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-02" class="cam-link">K00-02</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-03" class="cam-link">K00-03</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.10B.html?cam=K00-04" class="cam-link">K00-04</a></td>
+      <td><a href="T2.10B.html" class="sheet-link">T2.10B</a></td>
+      <td>Lower Level — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-05" class="cam-link">K00-05</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-06" class="cam-link">K00-06</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-07" class="cam-link">K00-07</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-08" class="cam-link">K00-08</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-09" class="cam-link">K00-09</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.10B.html?cam=K00-10" class="cam-link">K00-10</a></td>
+      <td><a href="T2.10B.html" class="sheet-link">T2.10B</a></td>
+      <td>Lower Level — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-11" class="cam-link">K00-11</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-12" class="cam-link">K00-12</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.10B.html?cam=K00-13" class="cam-link">K00-13</a></td>
+      <td><a href="T2.10B.html" class="sheet-link">T2.10B</a></td>
+      <td>Lower Level — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.10B.html?cam=K00-14" class="cam-link">K00-14</a></td>
+      <td><a href="T2.10B.html" class="sheet-link">T2.10B</a></td>
+      <td>Lower Level — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-15" class="cam-link">K00-15</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.10B.html?cam=K00-16" class="cam-link">K00-16</a></td>
+      <td><a href="T2.10B.html" class="sheet-link">T2.10B</a></td>
+      <td>Lower Level — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-17" class="cam-link">K00-17</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-18" class="cam-link">K00-18</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.10B.html?cam=K00-19" class="cam-link">K00-19</a></td>
+      <td><a href="T3.10B.html" class="sheet-link">T3.10B</a></td>
+      <td>Lower Level — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11A.html?cam=K01-01" class="cam-link">K01-01</a></td>
+      <td><a href="T2.11A.html" class="sheet-link">T2.11A</a></td>
+      <td>Level 1 — Floor Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11A.html?cam=K01-02" class="cam-link">K01-02</a></td>
+      <td><a href="T2.11A.html" class="sheet-link">T2.11A</a></td>
+      <td>Level 1 — Floor Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11A.html?cam=K01-03" class="cam-link">K01-03</a></td>
+      <td><a href="T2.11A.html" class="sheet-link">T2.11A</a></td>
+      <td>Level 1 — Floor Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11A.html?cam=K01-04" class="cam-link">K01-04</a></td>
+      <td><a href="T3.11A.html" class="sheet-link">T3.11A</a></td>
+      <td>Level 1 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11A.html?cam=K01-05" class="cam-link">K01-05</a></td>
+      <td><a href="T3.11A.html" class="sheet-link">T3.11A</a></td>
+      <td>Level 1 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11A.html?cam=K01-06" class="cam-link">K01-06</a></td>
+      <td><a href="T3.11A.html" class="sheet-link">T3.11A</a></td>
+      <td>Level 1 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11A.html?cam=K01-07" class="cam-link">K01-07</a></td>
+      <td><a href="T3.11A.html" class="sheet-link">T3.11A</a></td>
+      <td>Level 1 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11A.html?cam=K01-08" class="cam-link">K01-08</a></td>
+      <td><a href="T2.11A.html" class="sheet-link">T2.11A</a></td>
+      <td>Level 1 — Floor Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11A.html?cam=K01-09" class="cam-link">K01-09</a></td>
+      <td><a href="T2.11A.html" class="sheet-link">T2.11A</a></td>
+      <td>Level 1 — Floor Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-10" class="cam-link">K01-10</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-11" class="cam-link">K01-11</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-12" class="cam-link">K01-12</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-13" class="cam-link">K01-13</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-14" class="cam-link">K01-14</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-15" class="cam-link">K01-15</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-16" class="cam-link">K01-16</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-17" class="cam-link">K01-17</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-18" class="cam-link">K01-18</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-19" class="cam-link">K01-19</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-20" class="cam-link">K01-20</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-21" class="cam-link">K01-21</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-22" class="cam-link">K01-22</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-23" class="cam-link">K01-23</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-24" class="cam-link">K01-24</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-25" class="cam-link">K01-25</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-26" class="cam-link">K01-26</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-27" class="cam-link">K01-27</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-28" class="cam-link">K01-28</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-29" class="cam-link">K01-29</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-30" class="cam-link">K01-30</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-31" class="cam-link">K01-31</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-32" class="cam-link">K01-32</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-33" class="cam-link">K01-33</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-34" class="cam-link">K01-34</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-35" class="cam-link">K01-35</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-36" class="cam-link">K01-36</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-37" class="cam-link">K01-37</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-38" class="cam-link">K01-38</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-39" class="cam-link">K01-39</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-40" class="cam-link">K01-40</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.11B.html?cam=K01-41" class="cam-link">K01-41</a></td>
+      <td><a href="T3.11B.html" class="sheet-link">T3.11B</a></td>
+      <td>Level 1 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-42" class="cam-link">K01-42</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.11B.html?cam=K01-43" class="cam-link">K01-43</a></td>
+      <td><a href="T2.11B.html" class="sheet-link">T2.11B</a></td>
+      <td>Level 1 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.12A.html?cam=K02-01" class="cam-link">K02-01</a></td>
+      <td><a href="T2.12A.html" class="sheet-link">T2.12A</a></td>
+      <td>Level 2 — Floor Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12A.html?cam=K02-02" class="cam-link">K02-02</a></td>
+      <td><a href="T3.12A.html" class="sheet-link">T3.12A</a></td>
+      <td>Level 2 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12A.html?cam=K02-03" class="cam-link">K02-03</a></td>
+      <td><a href="T3.12A.html" class="sheet-link">T3.12A</a></td>
+      <td>Level 2 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12A.html?cam=K02-04" class="cam-link">K02-04</a></td>
+      <td><a href="T3.12A.html" class="sheet-link">T3.12A</a></td>
+      <td>Level 2 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12A.html?cam=K02-05" class="cam-link">K02-05</a></td>
+      <td><a href="T3.12A.html" class="sheet-link">T3.12A</a></td>
+      <td>Level 2 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-06" class="cam-link">K02-06</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-07" class="cam-link">K02-07</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.12B.html?cam=K02-08" class="cam-link">K02-08</a></td>
+      <td><a href="T2.12B.html" class="sheet-link">T2.12B</a></td>
+      <td>Level 2 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-09" class="cam-link">K02-09</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-10" class="cam-link">K02-10</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.12B.html?cam=K02-11" class="cam-link">K02-11</a></td>
+      <td><a href="T2.12B.html" class="sheet-link">T2.12B</a></td>
+      <td>Level 2 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-12" class="cam-link">K02-12</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-13" class="cam-link">K02-13</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-14" class="cam-link">K02-14</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.12B.html?cam=K02-15" class="cam-link">K02-15</a></td>
+      <td><a href="T2.12B.html" class="sheet-link">T2.12B</a></td>
+      <td>Level 2 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-16" class="cam-link">K02-16</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-17" class="cam-link">K02-17</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-18" class="cam-link">K02-18</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-19" class="cam-link">K02-19</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.12B.html?cam=K02-20" class="cam-link">K02-20</a></td>
+      <td><a href="T3.12B.html" class="sheet-link">T3.12B</a></td>
+      <td>Level 2 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.12B.html?cam=K02-21" class="cam-link">K02-21</a></td>
+      <td><a href="T2.12B.html" class="sheet-link">T2.12B</a></td>
+      <td>Level 2 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13A.html?cam=K03-01" class="cam-link">K03-01</a></td>
+      <td><a href="T2.13A.html" class="sheet-link">T2.13A</a></td>
+      <td>Level 3 — Floor Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13A.html?cam=K03-02" class="cam-link">K03-02</a></td>
+      <td><a href="T3.13A.html" class="sheet-link">T3.13A</a></td>
+      <td>Level 3 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13A.html?cam=K03-03" class="cam-link">K03-03</a></td>
+      <td><a href="T3.13A.html" class="sheet-link">T3.13A</a></td>
+      <td>Level 3 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13A.html?cam=K03-04" class="cam-link">K03-04</a></td>
+      <td><a href="T3.13A.html" class="sheet-link">T3.13A</a></td>
+      <td>Level 3 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13A.html?cam=K03-05" class="cam-link">K03-05</a></td>
+      <td><a href="T3.13A.html" class="sheet-link">T3.13A</a></td>
+      <td>Level 3 — Ceiling Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13A.html?cam=K03-06" class="cam-link">K03-06</a></td>
+      <td><a href="T2.13A.html" class="sheet-link">T2.13A</a></td>
+      <td>Level 3 — Floor Plan A</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13B.html?cam=K03-07" class="cam-link">K03-07</a></td>
+      <td><a href="T2.13B.html" class="sheet-link">T2.13B</a></td>
+      <td>Level 3 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13B.html?cam=K03-08" class="cam-link">K03-08</a></td>
+      <td><a href="T2.13B.html" class="sheet-link">T2.13B</a></td>
+      <td>Level 3 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13B.html?cam=K03-09" class="cam-link">K03-09</a></td>
+      <td><a href="T2.13B.html" class="sheet-link">T2.13B</a></td>
+      <td>Level 3 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-10" class="cam-link">K03-10</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-11" class="cam-link">K03-11</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-12" class="cam-link">K03-12</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-13" class="cam-link">K03-13</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-14" class="cam-link">K03-14</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13B.html?cam=K03-15" class="cam-link">K03-15</a></td>
+      <td><a href="T2.13B.html" class="sheet-link">T2.13B</a></td>
+      <td>Level 3 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13B.html?cam=K03-16" class="cam-link">K03-16</a></td>
+      <td><a href="T2.13B.html" class="sheet-link">T2.13B</a></td>
+      <td>Level 3 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-17" class="cam-link">K03-17</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-18" class="cam-link">K03-18</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-19" class="cam-link">K03-19</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13B.html?cam=K03-20" class="cam-link">K03-20</a></td>
+      <td><a href="T2.13B.html" class="sheet-link">T2.13B</a></td>
+      <td>Level 3 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-21" class="cam-link">K03-21</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-22" class="cam-link">K03-22</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13B.html?cam=K03-23" class="cam-link">K03-23</a></td>
+      <td><a href="T2.13B.html" class="sheet-link">T2.13B</a></td>
+      <td>Level 3 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13B.html?cam=K03-24" class="cam-link">K03-24</a></td>
+      <td><a href="T2.13B.html" class="sheet-link">T2.13B</a></td>
+      <td>Level 3 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T3.13B.html?cam=K03-25" class="cam-link">K03-25</a></td>
+      <td><a href="T3.13B.html" class="sheet-link">T3.13B</a></td>
+      <td>Level 3 — Ceiling Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.13B.html?cam=K03-26" class="cam-link">K03-26</a></td>
+      <td><a href="T2.13B.html" class="sheet-link">T2.13B</a></td>
+      <td>Level 3 — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.14B.html?cam=KRF-01" class="cam-link">KRF-01</a></td>
+      <td><a href="T2.14B.html" class="sheet-link">T2.14B</a></td>
+      <td>Roof — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+
+    <tr>
+      <td><a href="T2.14B.html?cam=KRF-02" class="cam-link">KRF-02</a></td>
+      <td><a href="T2.14B.html" class="sheet-link">T2.14B</a></td>
+      <td>Roof — Floor Plan B</td>
+      <td class="precise">Nov 2026</td>
+    </tr>
+  </tbody>
+</table>
+<div class="count" id="count">111 cameras</div>
+
+<script>
+function filterTable() {
+  const q = document.getElementById("search").value.toLowerCase();
+  const rows = document.querySelectorAll("#tbl tbody tr");
+  let shown = 0;
+  rows.forEach(r => {
+    const match = r.textContent.toLowerCase().includes(q);
+    r.style.display = match ? "" : "none";
+    if (match) shown++;
+  });
+  document.getElementById("count").textContent = shown + " cameras shown";
+}
+</script>
+</body>
+</html>
